@@ -5,7 +5,7 @@
 using namespace std;
 
 //----------Constructors--------//
-Player::Player()
+Player::Player() //sets all values to 0
 {
     name = "";
     
@@ -36,6 +36,7 @@ Player::Player(string name, string recordLine)
     hits_by_pitch = 0;
     sacrifices = 0;
     plate_appearances = 0;
+    
     sortRecord(recordLine);
 }
 
@@ -60,7 +61,7 @@ Player::~Player()
 }
 
 //----------Miscellaneous--------//
-void Player::sortRecord(string record)
+void Player::sortRecord(string record) //given a string of characters, increases respective value in Player object
 {
     bool invalid = false;
     bool atbat = false;
@@ -101,7 +102,63 @@ void Player::sortRecord(string record)
 }
 
 //-------Overloaded Operators---------//
-Player& Player::operator=(const Player &obj)
+bool Player::operator==(const Player &right) // returns true if objects are equal
+{
+    if(this->name == right.name &&
+       this->at_bats == right.at_bats &&
+       this->hits == right.hits &&
+       this->walks == right.walks &&
+       this->strikeouts == right.strikeouts &&
+       this->outs == right.outs &&
+       this->hits_by_pitch == right.hits_by_pitch &&
+       this->sacrifices == right.sacrifices &&
+       this->plate_appearances == right.plate_appearances) return true;
+    return false;
+}
+
+bool Player::operator>(const Player &right) //returns true if first object is greater
+{
+    if(this->name > right.name &&
+       this->at_bats > right.at_bats &&
+       this->hits > right.hits &&
+       this->walks > right.walks &&
+       this->strikeouts > right.strikeouts &&
+       this->outs > right.outs &&
+       this->hits_by_pitch > right.hits_by_pitch &&
+       this->sacrifices > right.sacrifices &&
+       this->plate_appearances > right.plate_appearances) return true;
+    return false;
+}
+
+bool Player::operator<(const Player &right) //returns true if first object is less
+{
+    if(this->name < right.name &&
+       this->at_bats < right.at_bats &&
+       this->hits < right.hits &&
+       this->walks < right.walks &&
+       this->strikeouts < right.strikeouts &&
+       this->outs < right.outs &&
+       this->hits_by_pitch < right.hits_by_pitch &&
+       this->sacrifices < right.sacrifices &&
+       this->plate_appearances < right.plate_appearances) return true;
+    return false;
+}
+
+bool Player::operator<=(const Player &right) //returns true if first object is less than or equal to
+{
+    if(this->name <= right.name &&
+       this->at_bats <= right.at_bats &&
+       this->hits <= right.hits &&
+       this->walks <= right.walks &&
+       this->strikeouts <= right.strikeouts &&
+       this->outs <= right.outs &&
+       this->hits_by_pitch <= right.hits_by_pitch &&
+       this->sacrifices <= right.sacrifices &&
+       this->plate_appearances <= right.plate_appearances) return true;
+    return false;
+}
+
+Player& Player::operator=(const Player &obj) //copies a given player object to the one that called
 {
     this->name = obj.name;
     

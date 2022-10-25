@@ -44,29 +44,30 @@ class Player
         void setSacrifices(int num) {sacrifices = num;}
     
         int getPlate_Appearances() {return plate_appearances;}
-    void setPlate_Appearances(int num) {plate_appearances = num;}
+        void setPlate_Appearances(int num) {plate_appearances = num;}
     
         //-----------Calculators------------//
-        double calcBA()
+        double getBA()
         {
             if(at_bats == 0) return 0;
-            return (double)hits/at_bats;
+            return (double)hits/at_bats; //calculates batting average
         }
-        double calcOB()
+        double getOB()
         {
             if(plate_appearances == 0) return 0;
-            return ((double)(hits + walks + hits_by_pitch)/(double)plate_appearances);
+            return ((double)(hits + walks + hits_by_pitch) // calculates on-base percentage
+                    /(double)plate_appearances);
         }
 
         //----------Overloaded Operators----------//
-        bool operator==(Player &right);
-        bool operator>(Player &right);
-        bool operator<(Player &right);
+        bool operator==(const Player &right);
+        bool operator>(const Player &right);
+        bool operator<(const Player &right);
+        bool operator<=(const Player &right);
 
         Player& operator=(const Player &obj);
-        friend ostream& operator<<(ostream&, const Player &obj);
     
-        friend ostream& operator<<(ostream& out, Player &obj)
+        friend ostream& operator<<(ostream& out, Player &obj) //outputs player stats in this format
         {
             out << obj.getName() << "\t";
             out << obj.getAt_Bats() << "\t";
@@ -75,11 +76,11 @@ class Player
             out << obj.getStrikeouts() << "\t";
             out << obj.getHits_By_Pitch() << "\t";
             out << obj.getSacrifices() << "\t";
-            out << fixed << setprecision(3) << obj.calcBA() << "\t";
-            out << fixed << setprecision(3) << obj.calcOB() << endl;
+            out << fixed << setprecision(3) << obj.getBA() << "\t";
+            out << fixed << setprecision(3) << obj.getOB() << endl;
             return out;
         }
-        friend istream& operator>>(istream&, Player &obj);
+        //friend istream& operator>>(istream&, Player &obj);
 
     private:
         string name;
